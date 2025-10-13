@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import { quizQuestions } from "../../../data/quizData";
 import { useState } from "react";
 
+
 export default function QuizPage() {
   const { slug } = useParams();
   const key = slug.toLowerCase();

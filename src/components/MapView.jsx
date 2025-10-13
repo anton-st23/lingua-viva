@@ -3,14 +3,27 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import "leaflet/dist/leaflet.css";
-import { Marker, Popup, TileLayer } from "react-leaflet";
-import L from "leaflet";
 import LanguageChatBot from "@/components/LanguageChatBot";
 
+// 🔥 Динамический импорт MapContainer с отключением SSR
 const MapContainer = dynamic(
-  () => import("react-leaflet").then((mod) => mod.MapContainer),
-  { ssr: false } // 🔥 Важно: карта рендерится только на клиенте
+  () => import("react-leaflet").then(mod => mod.MapContainer),
+  { ssr: false }
 );
+const TileLayer = dynamic(
+  () => import("react-leaflet").then(mod => mod.TileLayer),
+  { ssr: false }
+);
+const Marker = dynamic(
+  () => import("react-leaflet").then(mod => mod.Marker),
+  { ssr: false }
+);
+const Popup = dynamic(
+  () => import("react-leaflet").then(mod => mod.Popup),
+  { ssr: false }
+);
+
+import L from "leaflet";
 
 const markerIcon = new L.Icon({
   iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
@@ -23,8 +36,10 @@ const markerIcon = new L.Icon({
 
 export default function HomePage() {
   const [mapItems, setMapItems] = useState([]);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true); // включаем клиентский рендер
     import("@/data/languages.json").then((data) => {
       const items = data.default || data;
       const uniqueItems = Array.from(new Map(items.map(it => [it.slug, it])).values());
@@ -40,20 +55,14 @@ export default function HomePage() {
     });
   }, []);
 
+  if (!isClient) return <p className="text-center p-10">Loading map...</p>;
+
   const totalLanguages = mapItems.length;
   const criticallyEndangered = mapItems.filter(it => it.status.toLowerCase().includes("critically")).length;
   const endangered = mapItems.filter(it => it.status.toLowerCase().includes("endangered") && !it.status.toLowerCase().includes("critically")).length;
   const vulnerable = mapItems.filter(it => it.status.toLowerCase().includes("vulnerable")).length;
   const safe = mapItems.filter(it => it.status.toLowerCase().includes("safe")).length;
   const totalSpeakers = mapItems.reduce((sum, it) => sum + (it.speakers || 0), 0);
-
-  // 🧠 Проверка на window для SSR
-  const [isClient, setIsClient] = useState(false);
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  if (!isClient) return <p className="text-center p-10">Loading map...</p>;
 
   return (
     <div className="bg-gray-900 text-gray-100 min-h-screen">
