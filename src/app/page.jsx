@@ -97,7 +97,7 @@ export default function HomePage() {
 
         <div className="flex-1 flex justify-end">
           <Image
-            src="/icons/lingua_team.jpg"
+            src="/icons/languages-signpost.jpg"
             alt="LinguaViva Team"
             width={600}
             height={400}
