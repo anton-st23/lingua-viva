@@ -1,5 +1,6 @@
 "use client";
 
+import LanguageCourseList from "@/components/LanguageCourseList";
 import LanguageBot from "@/components/LanguageChatBot";
 import Link from "next/link";
 import { ArrowRight, Globe, Book, Percent, Clock } from "lucide-react";
@@ -32,6 +33,7 @@ export default function HomePage() {
   return (
     <main className="space-y-24 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 min-h-screen text-gray-800">
 
+      {/* Hero Section */}
       <section className="rounded-3xl p-12 text-white shadow-xl text-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
         <div className="flex justify-center mb-6">
           <Image
@@ -52,28 +54,25 @@ export default function HomePage() {
         </p>
 
         <div className="mt-8 flex gap-4 justify-center">
-  <Link
-    href="/map"
-    className="inline-flex items-center gap-2 rounded-2xl bg-white px-6 py-3 text-indigo-600 font-semibold hover:bg-gray-100 transition"
-  >
-    View Map <ArrowRight size={18} />
-  </Link>
-  <Link
-    href="/gallery"
-    className="inline-flex items-center gap-2 rounded-2xl bg-white px-6 py-3 text-purple-600 font-semibold hover:bg-gray-100 transition"
-  >
-    View Gallery <ArrowRight size={18} />
-  </Link>
-  <Link
-    href="/quiz"
-    className="inline-flex items-center gap-2 rounded-2xl bg-white px-6 py-3 text-pink-600 font-semibold hover:bg-gray-100 transition"
-  >
-    Try to take Quiz <ArrowRight size={18} />
-  </Link>
-</div>
-
-
-        
+          <Link
+            href="/map"
+            className="inline-flex items-center gap-2 rounded-2xl bg-white px-6 py-3 text-indigo-600 font-semibold hover:bg-gray-100 transition"
+          >
+            View Map <ArrowRight size={18} />
+          </Link>
+          <Link
+            href="/gallery"
+            className="inline-flex items-center gap-2 rounded-2xl bg-white px-6 py-3 text-purple-600 font-semibold hover:bg-gray-100 transition"
+          >
+            View Gallery <ArrowRight size={18} />
+          </Link>
+          <Link
+            href="/quiz"
+            className="inline-flex items-center gap-2 rounded-2xl bg-white px-6 py-3 text-pink-600 font-semibold hover:bg-gray-100 transition"
+          >
+            Try to take Quiz <ArrowRight size={18} />
+          </Link>
+        </div>
       </section>
 
       <section className="flex flex-col md:flex-row items-center gap-12 px-8">
@@ -169,21 +168,17 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
       <section>
-        <div>
-      <h1 className="text-3xl font-bold text-center mt-10">Language Courses</h1>
-        <LanguageCoursesList />
-      </div>
+        <h1 className="text-3xl font-bold text-center mt-10">Language Courses</h1>
+        <div className="px-8 mt-6">
+          <LanguageCourseList />
+        </div>
       </section>
-      <section className="py-12 px-8">
-        <LanguageBot />
-      </section>
-      <section className="py-12 px-8">
-        <LanguageTrends />
-      </section>
-      <section className="py-12 px-8">
-        <DailyPhrase />
-      </section>
+
+      <section className="py-12 px-8"><LanguageBot /></section>
+      <section className="py-12 px-8"><LanguageTrends /></section>
+      <section className="py-12 px-8"><DailyPhrase /></section>
 
       <footer className="bg-indigo-200 text-gray-800 text-center py-6 rounded-t-3xl">
         <p>© {new Date().getFullYear()} LinguaViva | Contact: <a href="mailto:linguaviva0221@gmail.com" className="underline">linguaviva0221@gmail.com</a></p>
