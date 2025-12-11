@@ -169,7 +169,12 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
+      <section>
+        <div>
+      <h1 className="text-3xl font-bold text-center mt-10">Language Courses</h1>
+        <LanguageCoursesList />
+      </div>
+      </section>
       <section className="py-12 px-8">
         <LanguageBot />
       </section>
