@@ -1,5 +1,4 @@
 import React from "react";
-import { FaStar } from "react-icons/fa";
 
 export default function LanguageCourseCard({ name, description, rating, image, onEnroll }) {
   return (
@@ -13,7 +12,6 @@ export default function LanguageCourseCard({ name, description, rating, image, o
       <h2 className="text-xl font-bold mb-1">{name}</h2>
 
       <div className="flex items-center mb-2">
-        <FaStar className="text-yellow-500 mr-1" />
         <span className="text-gray-700 font-medium">{rating.toFixed(1)}</span>
       </div>
 
